@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\geometry{margin=2.5cm}
+
+\title{\textbf{Tablas de Resultados e Informe Final}\\
+Eficiencia de Algoritmos de Ordenamiento\\
+APOCO -- Organizador de Hampones}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ============================================================
+\section*{Descripción del programa}
+
+Se desarrolló una aplicación en Java con arquitectura MVC que organiza a los miembros de APOCO (Asociación de Políticos Corruptos) en un auditorio de $k$ filas y $m$ columnas según dos criterios:
+
+\begin{itemize}
+    \item \textbf{Entre filas:} ordenados por la cantidad de dinero que están dispuestos a robar (de menor a mayor).
+    \item \textbf{Dentro de cada fila:} ordenados por edad (de menor a mayor, empezando por el más joven).
+\end{itemize}
+
+El programa permite:
+\begin{itemize}
+    \item Ingresar la cantidad de hampones $n$ (debe ser un cuadrado perfecto para que la matriz sea cuadrada sin celdas vacías).
+    \item Elegir el tipo de lista generada: aleatoria, mayor a menor, o menor a mayor.
+    \item Ver el auditorio organizado como una tabla visual con los resultados de los 5 algoritmos, cada uno en su propia pestaña.
+    \item Comparar la cantidad de iteraciones que realizó cada algoritmo para ordenar la misma lista.
+\end{itemize}
+
+Los cinco algoritmos implementados son: \textbf{Bubble Sort}, \textbf{Selection Sort}, \textbf{Insertion Sort}, \textbf{Quick Sort} y \textbf{Merge Sort}.
+
+% ============================================================
+\section*{Resultados por tipo de lista}
+
+\subsection*{Lista Aleatoria}
+
+\begin{table}[H]
+\centering
+\caption{Iteraciones -- Lista Aleatoria}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Algoritmo} & \textbf{$n=25$} & \textbf{$n=100$} & \textbf{$n=144$} & \textbf{$n=225$} & \textbf{$n=400$} & \textbf{$n=676$} \\
+\midrule
+Bubble Sort    & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Selection Sort & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Insertion Sort & 221  & 2773  & 5872  & 14221 & 41940  & 117985 \\
+Quick Sort     & 144  & 801   & 1361  & 2344  & 5119   & 9921   \\
+Merge Sort     & 124  & 759   & 1205  & 2105  & 4208   & 7915   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Lista Mayor a Menor}
+
+\begin{table}[H]
+\centering
+\caption{Iteraciones -- Lista Mayor a Menor}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Algoritmo} & \textbf{$n=25$} & \textbf{$n=100$} & \textbf{$n=144$} & \textbf{$n=225$} & \textbf{$n=400$} & \textbf{$n=676$} \\
+\midrule
+Bubble Sort    & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Selection Sort & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Insertion Sort & 344  & 5139  & 10571 & 25634 & 80579  & 229475 \\
+Quick Sort     & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Merge Sort     & 89   & 506   & 784   & 1338  & 2624   & 4854   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Lista Menor a Mayor}
+
+\begin{table}[H]
+\centering
+\caption{Iteraciones -- Lista Menor a Mayor}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Algoritmo} & \textbf{$n=25$} & \textbf{$n=100$} & \textbf{$n=144$} & \textbf{$n=225$} & \textbf{$n=400$} & \textbf{$n=676$} \\
+\midrule
+Bubble Sort    & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Selection Sort & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Insertion Sort & 44   & 189   & 275   & 434   & 779    & 1325   \\
+Quick Sort     & 350  & 5400  & 11088 & 26775 & 83600  & 236600 \\
+Merge Sort     & 79   & 466   & 736   & 1271  & 2464   & 4522   \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection*{Sobre Bubble Sort y Selection Sort}
+
+\begin{itemize}
+    \item Ambos algoritmos tuvieron exactamente el mismo número de iteraciones en todos los casos.
+    \item Esto se debe a que los dos recorren el arreglo de la misma forma: comparando todos los pares posibles sin importar si ya está ordenado.
+    \item Son los menos eficientes del grupo: con $n=676$ llegan a más de 236\,000 iteraciones.
+    \item No se benefician del orden previo de los datos.
+\end{itemize}
+
+\subsection*{Sobre Insertion Sort}
+
+\begin{itemize}
+    \item Su rendimiento depende fuertemente del orden inicial de la lista.
+    \item Con lista \textbf{menor a mayor} fue el más rápido de todos: solo 1\,325 iteraciones con $n=676$.
+    \item Con lista \textbf{mayor a menor} fue casi tan lento como Bubble y Selection Sort.
+    \item Es el algoritmo más sensible al contexto de los datos.
+\end{itemize}
+
+\subsection*{Sobre Quick Sort}
+
+\begin{itemize}
+    \item En listas aleatorias fue muy eficiente: solo 9\,921 iteraciones con $n=676$.
+    \item Sin embargo, con listas ya ordenadas (mayor a menor o menor a mayor) su rendimiento cayó al nivel de Bubble Sort.
+    \item Esto ocurre porque el pivote queda siempre en el peor lugar posible, lo que convierte su comportamiento en $O(n^2)$.
+    \item Es rápido en promedio, pero tiene un punto débil con datos ordenados.
+\end{itemize}
+
+\subsection*{Sobre Merge Sort}
+
+\begin{itemize}
+    \item Fue el algoritmo más consistente en todos los contextos.
+    \item Con $n=676$: 7\,915 iteraciones (aleatoria), 4\,854 (mayor a menor), 4\,522 (menor a mayor).
+    \item No le afecta el orden previo de los datos de forma significativa.
+    \item Es el más recomendable cuando no se conoce el estado de los datos de entrada.
+\end{itemize}
+
+\subsection*{Conclusión general}
+
+\begin{itemize}
+    \item No existe un algoritmo universalmente mejor: la eficiencia depende del contexto.
+    \item Para datos aleatorios: \textbf{Merge Sort} y \textbf{Quick Sort} son los mejores.
+    \item Para datos casi ordenados: \textbf{Insertion Sort} es sorprendentemente eficiente.
+    \item Para datos en orden inverso: \textbf{Merge Sort} es la mejor opción.
+    \item Bubble y Selection Sort solo son aceptables para $n$ muy pequeños.
+\end{itemize}
+
+\end{document}
