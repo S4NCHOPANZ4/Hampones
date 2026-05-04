@@ -1,4 +1,5 @@
-package co.ciencias.hampones.model;
+package co.ciencias.hampones.controller;
+import co.ciencias.hampones.model.Hampon;
 import java.util.Comparator;
 
 public class Ordenador {
@@ -24,6 +25,7 @@ public class Ordenador {
         }
         return arr;
     }
+    
     public Hampon[][] ordenarMatrizBubblesort(Hampon[] datos){
         iteraciones = 0;
         Hampon[] copia = datos.clone();
@@ -126,7 +128,7 @@ public class Ordenador {
         arr[end] = temp;
         return i;
     }
-    public Hampon[][] odenarQuickSort(Hampon[] datos){
+    public Hampon[][] ordenarQuickSort(Hampon[] datos){
         iteraciones = 0;
         Hampon[] copia = datos.clone();
         copia = quickSort(copia, 0, copia.length - 1, "dinero");

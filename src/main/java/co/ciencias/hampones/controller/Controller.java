@@ -1,15 +1,16 @@
 package co.ciencias.hampones.controller;
 
-import co.ciencias.hampones.model.GeneradorDeHampones;
 import co.ciencias.hampones.model.Hampon;
-import co.ciencias.hampones.model.Ordenador;
+import co.ciencias.hampones.controller.Ordenador;
 import co.ciencias.hampones.view.VistaSwing;
+import java.awt.List;
 
 public class Controller {
 
     private GeneradorDeHampones generador;
     private Ordenador ordenador;
     private VistaSwing vista;
+    private java.util.List<Hampon> hampones;
 
     private String[] algoritmos = {"Bubble Sort", "Selection Sort", "Insertion Sort", "Quick Sort", "Merge Sort"};
 
@@ -20,21 +21,26 @@ public class Controller {
         vista.agregarListenerOrdenar(e -> ordenar());
     }
 
-    private void ordenar() {
+    private void ordenar(List<Hampon> hampones) {
+        this.hampones = hampones;
         int n;
         try {
             n = Integer.parseInt(vista.getCampoN());
         } catch (NumberFormatException ex) {
-            vista.mostrarError("Ingrese un numero entero valido.");
+            vista.mostrarError("Ingrese un número entero válido.");
             return;
         }
-        int raiz = (int) Math.round(Math.sqrt(n));
-        if (raiz * raiz != n || n <= 0) {
-            vista.mostrarError("El numero debe ser un cuadrado perfecto (4, 9, 16, 25...).");
+        
+        if (n <= 0) {
+            vista.mostrarError("La cantidad debe ser mayor que 0.");
             return;
         }
 
-        // Elegir generador según combo
+        // Crea un generador y el ordenador
+        GeneradorDeHampones generador = new GeneradorDeHampones();
+        Ordenador ordenador = new Ordenador();
+
+        // Elegir generador
         Hampon[] lista;
         switch (vista.getGeneradorSeleccionado()) {
             case 1:  lista = generador.generarListaDatosMayorAMenor(n); break;
@@ -50,7 +56,7 @@ public class Controller {
         resultados[0] = ordenador.ordenarMatrizBubblesort(lista);   iteraciones[0] = ordenador.getIteraciones();
         resultados[1] = ordenador.ordenarSelectionSort(lista);       iteraciones[1] = ordenador.getIteraciones();
         resultados[2] = ordenador.ordenarInsertionSort(lista);       iteraciones[2] = ordenador.getIteraciones();
-        resultados[3] = ordenador.odenarQuickSort(lista);            iteraciones[3] = ordenador.getIteraciones();
+        resultados[3] = ordenador.ordenarQuickSort(lista);           iteraciones[3] = ordenador.getIteraciones();
         resultados[4] = ordenador.ordenarMergeSort(lista);           iteraciones[4] = ordenador.getIteraciones();
 
         vista.getPanelAuditorio().mostrar(algoritmos, resultados, iteraciones);
