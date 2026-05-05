@@ -26,7 +26,7 @@ public class Controller {
             vista.mostrarError("Ingrese un número entero válido.");
             return;
         }
-        
+
         if (n <= 0) {
             vista.mostrarError("La cantidad debe ser mayor que 0.");
             return;
@@ -42,16 +42,16 @@ public class Controller {
 
         vista.getPanelLista().mostrar(lista);
 
-        Hampon[][][] resultados = new Hampon[5][][];
-        int[] iteraciones = new int[5];
+        Hampon[][][] resultados  = new Hampon[5][][];
+        int[]        iteraciones = new int[5];
+        long[]       tiempos     = new long[5];  
 
-        resultados[0] = ordenador.ordenarMatrizBubblesort(lista);   iteraciones[0] = ordenador.getIteraciones();
-        resultados[1] = ordenador.ordenarSelectionSort(lista);       iteraciones[1] = ordenador.getIteraciones();
-        resultados[2] = ordenador.ordenarInsertionSort(lista);       iteraciones[2] = ordenador.getIteraciones();
-        resultados[3] = ordenador.ordenarQuickSort(lista);           iteraciones[3] = ordenador.getIteraciones();
-        resultados[4] = ordenador.ordenarMergeSort(lista);           iteraciones[4] = ordenador.getIteraciones();
+        resultados[0] = ordenador.ordenarMatrizBubblesort(lista);  iteraciones[0] = ordenador.getIteraciones(); tiempos[0] = ordenador.getTiempoNs();
+        resultados[1] = ordenador.ordenarSelectionSort(lista);      iteraciones[1] = ordenador.getIteraciones(); tiempos[1] = ordenador.getTiempoNs();
+        resultados[2] = ordenador.ordenarInsertionSort(lista);      iteraciones[2] = ordenador.getIteraciones(); tiempos[2] = ordenador.getTiempoNs();
+        resultados[3] = ordenador.ordenarQuickSort(lista);          iteraciones[3] = ordenador.getIteraciones(); tiempos[3] = ordenador.getTiempoNs();
+        resultados[4] = ordenador.ordenarMergeSort(lista);          iteraciones[4] = ordenador.getIteraciones(); tiempos[4] = ordenador.getTiempoNs();
 
-        vista.getPanelAuditorio().mostrar(algoritmos, resultados, iteraciones);
+        vista.getPanelAuditorio().mostrar(algoritmos, resultados, iteraciones, tiempos);
     }
-    
 }

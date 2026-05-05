@@ -5,78 +5,73 @@ import java.util.Comparator;
 public class Ordenador {
 
     private int iteraciones;
-
-
-    public int getIteraciones() {
+    private long tiempoNs;   
+    public int getIteraciones(){ 
         return iteraciones;
     }
-
-    // Bubble Sort
+    public long getTiempoNs(){ 
+        return tiempoNs;
+    }
+    // ─── Bubble Sort ────────────────────────────────────────────────────────────
     public Hampon[] bubbleSort(Hampon[] arr, Comparator<Hampon> criterio) {
         int n = arr.length;
-        for (int i = 0; i < n - 1; i++) {
+        for (int i = 0; i < n - 1; i++){
             for (int j = 0; j < n - i - 1; j++) {
                 iteraciones++;
                 if (criterio.compare(arr[j], arr[j + 1]) > 0) {
-                    Hampon temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    Hampon t = arr[j]; arr[j] = arr[j+1]; arr[j+1] = t;
                 }
             }
         }
         return arr;
     }
-    
-    public Hampon[][] ordenarMatrizBubblesort(Hampon[] datos){
+    public Hampon[][] ordenarMatrizBubblesort(Hampon[] datos) {
         iteraciones = 0;
+        long inicio = System.nanoTime();
         Hampon[] copia = datos.clone();
         copia = bubbleSort(copia, (a,b) -> a.getDinero() - b.getDinero());
         Hampon[][] asientos = construirMatriz(copia);
-        int filas = asientos.length;
-        for(int i=0; i<filas; i++){
+        for (int i = 0; i < asientos.length; i++){
             asientos[i] = bubbleSort(asientos[i], (a,b) -> a.getEdad() - b.getEdad());
         }
+        tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
-
-    // Selection Sort
-    public Hampon[] selectionSort(Hampon[] arr, Comparator<Hampon> criterio){
+    // ─── Selection Sort ─────────────────────────────────────────────────────────
+    public Hampon[] selectionSort(Hampon[] arr, Comparator<Hampon> criterio) {
         int n = arr.length;
-        for(int i = 0; i < n-1; i++){
+        for (int i = 0; i < n - 1; i++) {
             int min = i;
-            for(int j = i + 1; j < n; j++){
+            for (int j = i + 1; j < n; j++) {
                 iteraciones++;
-                if(criterio.compare(arr[min], arr[j])> 0){
-                    min = j;
-                }
+                if (criterio.compare(arr[min], arr[j]) > 0) min = j;
             }
-            if(criterio.compare(arr[i] , arr[min]) > 0){
-                Hampon temp = arr[i];
-                arr[i] = arr[min];
-                arr[min] = temp;
+            if (criterio.compare(arr[i], arr[min]) > 0) {
+                Hampon t = arr[i]; arr[i] = arr[min]; arr[min] = t;
             }
         }
         return arr;
     }
-    public Hampon[][] ordenarSelectionSort(Hampon[] datos){
+    public Hampon[][] ordenarSelectionSort(Hampon[] datos) {
         iteraciones = 0;
+        long inicio = System.nanoTime();
         Hampon[] copia = datos.clone();
         copia = selectionSort(copia, (a,b) -> a.getDinero() - b.getDinero());
         Hampon[][] asientos = construirMatriz(copia);
-        int filas = asientos.length;
-        for(int i=0; i<filas; i++){
+        for (int i = 0; i < asientos.length; i++){
             asientos[i] = selectionSort(asientos[i], (a,b) -> a.getEdad() - b.getEdad());
         }
+        tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
 
-    // Insertion Sort
-    public Hampon[] insertionSort(Hampon[] arr, Comparator<Hampon> criterio){
+    // ─── Insertion Sort ─────────────────────────────────────────────────────────
+    public Hampon[] insertionSort(Hampon[] arr, Comparator<Hampon> criterio) {
         int n = arr.length;
-        for(int i = 1; i < n; i++){
+        for (int i = 1; i < n; i++) {
             Hampon temp = arr[i];
             int j = i - 1;
-            while(j >= 0 && criterio.compare(arr[j], temp) > 0){
+            while (j >= 0 && criterio.compare(arr[j], temp) > 0) {
                 iteraciones++;
                 arr[j + 1] = arr[j];
                 j--;
@@ -86,37 +81,39 @@ public class Ordenador {
         }
         return arr;
     }
-    public Hampon[][] ordenarInsertionSort(Hampon[] datos){
+    public Hampon[][] ordenarInsertionSort(Hampon[] datos) {
         iteraciones = 0;
+        long inicio = System.nanoTime();
         Hampon[] copia = datos.clone();
         copia = insertionSort(copia, (a,b) -> a.getDinero() - b.getDinero());
         Hampon[][] asientos = construirMatriz(copia);
-        int filas = asientos.length;
-        for(int i = 0; i < filas; i++){
+        for (int i = 0; i < asientos.length; i++){
             asientos[i] = insertionSort(asientos[i], (a,b) -> a.getEdad() - b.getEdad());
         }
+        tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
 
-    // Quick Sort
-    public Hampon[] quickSort(Hampon[] arr, int start, int end, String filtro){
-        if(end <= start) return arr;
-        int pivot = 0;
-        if(filtro.equals("dinero")){
+    // ─── Quick Sort ─────────────────────────────────────────────────────────────
+    public Hampon[] quickSort(Hampon[] arr, int start, int end, String filtro) {
+        if (end <= start) return arr;
+        int pivot;
+        if (filtro.equals("dinero")){
             pivot = particion(arr, start, end, (a,b) -> a.getDinero() - b.getDinero());
-        }else if(filtro.equals("edad")){
+        }
+        else{
             pivot = particion(arr, start, end, (a,b) -> a.getEdad() - b.getEdad());
         }
         quickSort(arr, start, pivot - 1, filtro);
         quickSort(arr, pivot + 1, end, filtro);
         return arr;
     }
-    public int particion(Hampon[] arr, int start, int end, Comparator<Hampon> comp){
+    public int particion(Hampon[] arr, int start, int end, Comparator<Hampon> comp) {
         Hampon pivot = arr[end];
         int i = start - 1;
-        for(int j = start; j <= end - 1; j++){
+        for (int j = start; j <= end - 1; j++) {
             iteraciones++;
-            if(comp.compare(pivot , arr[j]) > 0){
+            if (comp.compare(pivot, arr[j]) > 0) {
                 i++;
                 Hampon temp = arr[i];
                 arr[i] = arr[j];
@@ -124,24 +121,26 @@ public class Ordenador {
             }
         }
         i++;
-        Hampon temp = arr[i];
+        Hampon t = arr[i];
         arr[i] = arr[end];
-        arr[end] = temp;
+        arr[end] = t;
         return i;
     }
-    public Hampon[][] ordenarQuickSort(Hampon[] datos){
+    public Hampon[][] ordenarQuickSort(Hampon[] datos) {
         iteraciones = 0;
+        long inicio = System.nanoTime();
         Hampon[] copia = datos.clone();
         copia = quickSort(copia, 0, copia.length - 1, "dinero");
         Hampon[][] asientos = construirMatriz(copia);
-        int filas = asientos.length;
-        for(int i = 0; i < filas; i++){
+        for (int i = 0; i < asientos.length; i++){
             asientos[i] = quickSort(asientos[i], 0, asientos[i].length - 1, "edad");
         }
+        tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
 
-    // Merge Sort
+    // ─── Merge Sort ─────────────────────────────────────────────────────────────
+  // Merge Sort
     public Hampon[] mergeSort(Hampon[] arr, String filtro){
         int n = arr.length;
         if(n <= 1) return arr;
@@ -179,6 +178,7 @@ public class Ordenador {
     }
     public Hampon[][] ordenarMergeSort(Hampon[] data){
         iteraciones = 0;
+        long inicio = System.nanoTime();
         Hampon[] copia = data.clone();
         copia = mergeSort(copia, "dinero");
         Hampon[][] asientos = construirMatriz(copia);
@@ -186,21 +186,19 @@ public class Ordenador {
         for(int i = 0; i < filas; i++){
             asientos[i] = mergeSort(asientos[i], "edad");
         }
+        tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
-
-    public Hampon[][] construirMatriz(Hampon[] lista){
+    // ─── construirMatriz — cuadrado perfecto k×k ────────────────────────────────
+    public Hampon[][] construirMatriz(Hampon[] lista) {
         int n = lista.length;
         int k = (int) Math.sqrt(n);
-        int m = (int) Math.ceil((double) n / k);
+        int m = (k == 0) ? n : (int) Math.ceil((double) n / k);
         Hampon[][] matriz = new Hampon[k][m];
         int index = 0;
-        for(int i = 0; i < k; i++){
-            for(int j = 0; j < m; j++){
-                if(index < n){ matriz[i][j] = lista[index++]; }
-                else{ matriz[i][j] = null; }
-            }
-        }
+        for (int i = 0; i < k; i++)
+            for (int j = 0; j < m; j++)
+                matriz[i][j] = (index < n) ? lista[index++] : null;
         return matriz;
     }
 }
