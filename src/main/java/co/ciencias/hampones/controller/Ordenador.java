@@ -6,6 +6,7 @@ public class Ordenador {
 
     private int iteraciones;
 
+
     public int getIteraciones() {
         return iteraciones;
     }

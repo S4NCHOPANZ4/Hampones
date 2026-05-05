@@ -1,16 +1,13 @@
 package co.ciencias.hampones.controller;
 
 import co.ciencias.hampones.model.Hampon;
-import co.ciencias.hampones.controller.Ordenador;
 import co.ciencias.hampones.view.VistaSwing;
-import java.awt.List;
 
 public class Controller {
 
     private GeneradorDeHampones generador;
     private Ordenador ordenador;
     private VistaSwing vista;
-    private java.util.List<Hampon> hampones;
 
     private String[] algoritmos = {"Bubble Sort", "Selection Sort", "Insertion Sort", "Quick Sort", "Merge Sort"};
 
@@ -21,8 +18,7 @@ public class Controller {
         vista.agregarListenerOrdenar(e -> ordenar());
     }
 
-    private void ordenar(List<Hampon> hampones) {
-        this.hampones = hampones;
+    private void ordenar() {
         int n;
         try {
             n = Integer.parseInt(vista.getCampoN());
@@ -35,10 +31,6 @@ public class Controller {
             vista.mostrarError("La cantidad debe ser mayor que 0.");
             return;
         }
-
-        // Crea un generador y el ordenador
-        GeneradorDeHampones generador = new GeneradorDeHampones();
-        Ordenador ordenador = new Ordenador();
 
         // Elegir generador
         Hampon[] lista;
@@ -61,4 +53,5 @@ public class Controller {
 
         vista.getPanelAuditorio().mostrar(algoritmos, resultados, iteraciones);
     }
+    
 }

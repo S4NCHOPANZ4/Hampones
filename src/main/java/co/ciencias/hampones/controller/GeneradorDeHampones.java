@@ -61,8 +61,8 @@ public class GeneradorDeHampones {
     public Hampon[] generarListaDatosMenorAMayor(int cantidad) {
         Hampon[] lista = new Hampon[cantidad];
         for (int i = 0; i < cantidad; i++) {
-            int edad = i + 18;           // Crece: 18, 19, 20...
-            int dinero = i * 1000 + 100; // Crece: 100, 1100, 2100...
+            int edad = i + 18;           
+            int dinero = i * 1000 + 100; 
             String nombre = nombresDeHampones[random.nextInt(nombresDeHampones.length)];
             lista[i] = new Hampon(edad, dinero, nombre);
         }
