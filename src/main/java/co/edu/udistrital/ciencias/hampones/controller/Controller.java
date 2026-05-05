@@ -1,7 +1,7 @@
-package co.ciencias.hampones.controller;
+package co.edu.udistrital.ciencias.hampones.controller;
 
-import co.ciencias.hampones.model.Hampon;
-import co.ciencias.hampones.view.VistaSwing;
+import co.edu.udistrital.ciencias.hampones.model.Hampon;
+import co.edu.udistrital.ciencias.hampones.view.VistaSwing;
 
 public class Controller {
 

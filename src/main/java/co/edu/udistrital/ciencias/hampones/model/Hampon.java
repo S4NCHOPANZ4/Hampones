@@ -1,4 +1,4 @@
-package co.ciencias.hampones.model;
+package co.edu.udistrital.ciencias.hampones.model;
 
 /**
  * Representa la entidad de un Hampon dentro del sistema.

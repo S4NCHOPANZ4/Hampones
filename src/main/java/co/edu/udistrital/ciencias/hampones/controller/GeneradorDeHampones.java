@@ -1,6 +1,6 @@
-package co.ciencias.hampones.controller;
+package co.edu.udistrital.ciencias.hampones.controller;
 
-import co.ciencias.hampones.model.Hampon;
+import co.edu.udistrital.ciencias.hampones.model.Hampon;
 import java.util.Random;
 
 public class GeneradorDeHampones {

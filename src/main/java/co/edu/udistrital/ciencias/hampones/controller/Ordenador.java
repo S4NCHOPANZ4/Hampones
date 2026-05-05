@@ -1,5 +1,5 @@
-package co.ciencias.hampones.controller;
-import co.ciencias.hampones.model.Hampon;
+package co.edu.udistrital.ciencias.hampones.controller;
+import co.edu.udistrital.ciencias.hampones.model.Hampon;
 import java.util.Comparator;
 
 public class Ordenador {

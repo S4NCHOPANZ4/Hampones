@@ -1,4 +1,4 @@
-package co.ciencias.hampones.view;
+package co.edu.udistrital.ciencias.hampones.view;
 import java.util.Scanner;
 
 public class VistaConsola {

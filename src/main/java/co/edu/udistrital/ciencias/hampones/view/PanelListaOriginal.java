@@ -1,6 +1,6 @@
-package co.ciencias.hampones.view;
+package co.edu.udistrital.ciencias.hampones.view;
 
-import co.ciencias.hampones.model.Hampon;
+import co.edu.udistrital.ciencias.hampones.model.Hampon;
 import javax.swing.*;
 import java.awt.*;
 

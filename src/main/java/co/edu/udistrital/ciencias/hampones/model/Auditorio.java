@@ -1,4 +1,4 @@
-package co.ciencias.hampones.model;
+package co.edu.udistrital.ciencias.hampones.model;
 
 /**
  * Representa un auditorio compuesto por asientos.
