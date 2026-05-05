@@ -9,7 +9,7 @@
 \usepackage{enumitem}
 \geometry{margin=2.5cm}
 
-\title{\textbf{Tablas de Resultados e Informe Final}\\
+\title{\textbf{Tablas de Resultados}\\
 Eficiencia de Algoritmos de Ordenamiento\\
 APOCO -- Organizador de Hampones}
 \date{}
@@ -93,7 +93,60 @@ Merge Sort     & 79   & 466   & 736   & 1271  & 2464   & 4522   \\
 \bottomrule
 \end{tabular}
 \end{table}
+\subsection*{Tiempos de Ejecución}
+\subsubsection*{Lista Aleatoria}
+\begin{table}[H]
+\centering
+\caption{Tiempo en Microsegundos ($\mu s$) y Milisegundos ($ms$) -- Aleatoria}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Algoritmo} & \textbf{$n=25$} & \textbf{$n=100$} & \textbf{$n=144$} & \textbf{$n=225$} & \textbf{$n=400$} & \textbf{$n=676$} \\
+\midrule
+Bubble Sort    & 785.1 $\mu s$ & 407.9 $\mu s$ & 2.181 $ms$ & 1.929 $ms$ & 3.187 $ms$ & 963.3 $\mu s$ \\
+Selection Sort & 401.0 $\mu s$ & 312.8 $\mu s$ & 1.488 $ms$ & 1.244 $ms$ & 2.199 $ms$ & 1.589 $ms$    \\
+Insertion Sort & 415.2 $\mu s$ & 330.2 $\mu s$ & 946.1 $\mu s$ & 573.5 $\mu s$ & 2.273 $ms$ & 1.029 $ms$ \\
+Quick Sort     & 408.6 $\mu s$ & 140.1 $\mu s$ & 305.2 $\mu s$ & 56.1 $\mu s$  & 116.5 $\mu s$ & 169.1 $\mu s$ \\
+Merge Sort     & 394.2 $\mu s$ & 189.2 $\mu s$ & 300.2 $\mu s$ & 87.9 $\mu s$  & 132.6 $\mu s$ & 245.3 $\mu s$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
+\subsection*{Tiempos de Ejecución}
+\subsubsection*{Lista Mayor a Menor}
+\begin{table}[H]
+\centering
+\caption{Tiempo -- Inversa (Peor Caso)}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Algoritmo} & \textbf{$n=25$} & \textbf{$n=100$} & \textbf{$n=144$} & \textbf{$n=225$} & \textbf{$n=400$} & \textbf{$n=676$} \\
+\midrule
+Bubble Sort    & 72.0 $\mu s$  & 169.5 $\mu s$ & 274.7 $\mu s$ & 306.3 $\mu s$ & 865.0 $\mu s$ & 18.448 $ms$   \\
+Selection Sort & 42.3 $\mu s$  & 104.1 $\mu s$ & 68.3 $\mu s$  & 248.6 $\mu s$ & 91.4 $\mu s$  & 184.5 $\mu s$ \\
+Insertion Sort & 44.1 $\mu s$  & 64.5 $\mu s$  & 95.1 $\mu s$  & 149.6 $\mu s$ & 123.9 $\mu s$ & 264.2 $\mu s$ \\
+Quick Sort     & 84.2 $\mu s$  & 295.1 $\mu s$ & 176.0 $\mu s$ & 128.6 $\mu s$ & 272.9 $\mu s$ & 548.2 $\mu s$ \\
+Merge Sort     & 7.6 $\mu s$   & 28.9 $\mu s$  & 315.9 $\mu s$ & 67.2 $\mu s$  & 49.2 $\mu s$  & 87.0 $\mu s$  \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection*{Tiempos de Ejecución }
+\subsubsection*{Lista Menor a Mayor}
+
+\begin{table}[H]
+\centering
+\caption{Tiempo -- Ordenada (Mejor Caso)}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Algoritmo} & \textbf{$n=25$} & \textbf{$n=100$} & \textbf{$n=144$} & \textbf{$n=225$} & \textbf{$n=400$} & \textbf{$n=676$} \\
+\midrule
+Bubble Sort    & 66.1 $\mu s$ & 394.3 $\mu s$ & 158.2 $\mu s$ & 61.1 $\mu s$  & 87.2 $\mu s$  & 236.4 $\mu s$ \\
+Selection Sort & 4.4 $\mu s$  & 11.3 $\mu s$  & 17.5 $\mu s$  & 36.4 $\mu s$  & 66.1 $\mu s$  & 170.9 $\mu s$ \\
+Insertion Sort & 2.4 $\mu s$  & 6.2 $\mu s$   & 8.3 $\mu s$   & 4.2 $\mu s$   & 6.5 $\mu s$   & 12.7 $\mu s$  \\
+Quick Sort     & 11.1 $\mu s$ & 26.2 $\mu s$  & 46.2 $\mu s$  & 95.3 $\mu s$  & 298.2 $\mu s$ & 777.2 $\mu s$ \\
+Merge Sort     & 6.6 $\mu s$  & 14.9 $\mu s$  & 21.8 $\mu s$  & 24.9 $\mu s$  & 38.9 $\mu s$  & 63.2 $\mu s$  \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection*{Sobre Bubble Sort y Selection Sort}
 
@@ -130,6 +183,8 @@ Merge Sort     & 79   & 466   & 736   & 1271  & 2464   & 4522   \\
     \item No le afecta el orden previo de los datos de forma significativa.
     \item Es el más recomendable cuando no se conoce el estado de los datos de entrada.
 \end{itemize}
+
+
 
 \subsection*{Conclusión general}
 
