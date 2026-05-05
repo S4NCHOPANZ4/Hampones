@@ -32,6 +32,12 @@ public class Controller {
             return;
         }
 
+        int raiz = (int) Math.round(Math.sqrt(n));
+        if (raiz * raiz != n) {
+            vista.mostrarError("El numero ingresado no es un cuadrado perfecto.\nEjemplo vaalido: 4, 9, 16, 25...");
+            return;
+        }
+
         // Elegir generador
         Hampon[] lista;
         switch (vista.getGeneradorSeleccionado()) {
