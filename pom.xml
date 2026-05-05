@@ -8,6 +8,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>co.ciencias.hampones.controller.AplMain</exec.mainClass>
+        <exec.mainClass>co.edu.udistrital.ciencias.hampones.controller.AplMain</exec.mainClass>
     </properties>
 </project>
