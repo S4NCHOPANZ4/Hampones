@@ -110,4 +110,34 @@ public class GeneradorDeHampones {
         }
         return lista;
     }
+    
+     /**
+     * Metodo para importar una lista de hampones desde un archivo TXT.
+     * Formato esperado (una línea por hampón): nombre,edad,dinero
+     */
+    public Hampon[] importarListaDesdeArchivo(String rutaArchivo) throws Exception {
+        java.util.List<Hampon> lista = new java.util.ArrayList<>();
+
+        try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                linea = linea.trim();
+                if (linea.isEmpty()) continue;
+
+                String[] partes = linea.split(",");
+                if (partes.length == 3) {
+                    try {
+                        String nombre = partes[0].trim();
+                        int edad = Integer.parseInt(partes[1].trim());
+                        int dinero = Integer.parseInt(partes[2].trim());
+                        lista.add(new Hampon(edad, dinero, nombre));
+                    } catch (NumberFormatException e) {
+                        System.err.println("Línea inválida: " + linea);
+                    }
+                }
+            }
+        }
+
+        return lista.toArray(new Hampon[0]);
+}
 }

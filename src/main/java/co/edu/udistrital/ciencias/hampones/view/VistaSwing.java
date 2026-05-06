@@ -11,11 +11,13 @@ public class VistaSwing extends JFrame {
     private JComboBox<String> comboGenerador;
     private PanelAuditorio panelAuditorio;
     private PanelListaOriginal panelLista;
+    private JFileChooser fileChooser;
 
     private static final String[] GENERADORES = {
         "Aleatoria",
         "Mayor a Menor",
-        "Menor a Mayor"
+        "Menor a Mayor",
+        "Importar desde TXT"
     };
 
     public VistaSwing() {
@@ -29,12 +31,29 @@ public class VistaSwing extends JFrame {
         panelTop.add(new JLabel("Cantidad (cuadrado perfecto):"));
         campoN = new JTextField(6);
         panelTop.add(campoN);
-        panelTop.add(new JLabel("Tipo de lista:"));
+        panelTop.add(new JLabel("Tipo de lista a generar:"));
         comboGenerador = new JComboBox<>(GENERADORES);
         panelTop.add(comboGenerador);
         botonOrdenar = new JButton("Ordenar");
         panelTop.add(botonOrdenar);
         add(panelTop, BorderLayout.NORTH);
+        
+        fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new java.io.File(System.getProperty("user.dir") + "/DOCS"));
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos TXT", "txt"));
+
+        // listener de "Importar desde TXT"
+        comboGenerador.addActionListener(e -> {
+            if (comboGenerador.getSelectedIndex() == 3) { 
+                int resultado = fileChooser.showOpenDialog(this);
+                if (resultado == JFileChooser.APPROVE_OPTION) {
+                   
+                } else {
+                    comboGenerador.setSelectedIndex(0); // Volver
+                }
+            }
+        });
 
         // Paneles centrales
         panelAuditorio = new PanelAuditorio();
@@ -51,6 +70,10 @@ public class VistaSwing extends JFrame {
     public String getCampoN() { return campoN.getText().trim(); }
 
     public int getGeneradorSeleccionado() { return comboGenerador.getSelectedIndex(); }
+    
+    public java.io.File getArchivoSeleccionado() {
+        return fileChooser.getSelectedFile();
+    }
 
     public void mostrarError(String msj) {
         JOptionPane.showMessageDialog(this, msj, "Error", JOptionPane.ERROR_MESSAGE);
