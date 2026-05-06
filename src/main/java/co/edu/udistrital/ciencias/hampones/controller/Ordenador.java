@@ -2,17 +2,45 @@ package co.edu.udistrital.ciencias.hampones.controller;
 import co.edu.udistrital.ciencias.hampones.model.Hampon;
 import java.util.Comparator;
 
+/**
+ * Clase encargada de ejecutar múltiples algoritmos de ordenamiento sobre objetos de tipo {@link Hampon}.
+ * 
+ * <p>La clase implementa cinco algoritmos clásicos (Bubble, Selection, Insertion, Quick y Merge Sort). 
+ * Realiza un ordenamiento en dos fases: primero ordena un arreglo lineal por dinero y luego 
+ * transforma ese arreglo en una matriz donde cada fila se ordena individualmente por edad.</p>
+ * 
+ */
 public class Ordenador {
 
-    private int iteraciones;
-    private long tiempoNs;   
+    private int iteraciones;         /** Contador de iteraciones*/
+    private long tiempoNs;           /** Tiempo de ejecución en nanosegundos */
+    
+    
+    /**
+     * Obtiene el número de iteraciones del último proceso de ordenamiento.
+     * @return Cantidad de operaciones contabilizadas.
+     */
     public int getIteraciones(){ 
         return iteraciones;
     }
+    
+    /**
+     * Obtiene el tiempo de ejecución en nanosegundos del último proceso.
+     * @return Tiempo transcurrido en nanosegundos.
+     */
     public long getTiempoNs(){ 
         return tiempoNs;
     }
+    
+    
     // ─── Bubble Sort ────────────────────────────────────────────────────────────
+    
+    /**
+     * Implementación estándar del algoritmo Bubble Sort.
+     * @param arr Arreglo de Hampones a ordenar.
+     * @param criterio Comparador que define la lógica de ordenamiento.
+     * @return El mismo arreglo ordenado.
+     */
     public Hampon[] bubbleSort(Hampon[] arr, Comparator<Hampon> criterio) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++){
@@ -25,6 +53,13 @@ public class Ordenador {
         }
         return arr;
     }
+    
+    /**
+     * Ejecuta el proceso de ordenamiento Bubble Sort completo: linealmente por dinero 
+     * y matricialmente por edad.
+     * @param datos Arreglo original de hampones.
+     * @return Matriz de hampones ordenada.
+     */
     public Hampon[][] ordenarMatrizBubblesort(Hampon[] datos) {
         iteraciones = 0;
         long inicio = System.nanoTime();
@@ -37,7 +72,16 @@ public class Ordenador {
         tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
+    
+    
     // ─── Selection Sort ─────────────────────────────────────────────────────────
+    
+    /**
+     * Implementación del algoritmo Selection Sort.
+     * @param arr Arreglo de Hampones a ordenar.
+     * @param criterio Comparador que define la lógica de ordenamiento.
+     * @return Arreglo ordenado.
+     */
     public Hampon[] selectionSort(Hampon[] arr, Comparator<Hampon> criterio) {
         int n = arr.length;
         for (int i = 0; i < n - 1; i++) {
@@ -52,6 +96,12 @@ public class Ordenador {
         }
         return arr;
     }
+    
+    /**
+     * Ejecuta el proceso de ordenamiento Selection Sort.
+     * @param datos Arreglo original de hampones.
+     * @return Matriz de hampones ordenada.
+     */
     public Hampon[][] ordenarSelectionSort(Hampon[] datos) {
         iteraciones = 0;
         long inicio = System.nanoTime();
@@ -66,6 +116,13 @@ public class Ordenador {
     }
 
     // ─── Insertion Sort ─────────────────────────────────────────────────────────
+    
+    /**
+     * Implementación del algoritmo Insertion Sort.
+     * @param arr Arreglo de Hampones a ordenar.
+     * @param criterio Comparador que define la lógica de ordenamiento.
+     * @return Arreglo ordenado.
+     */
     public Hampon[] insertionSort(Hampon[] arr, Comparator<Hampon> criterio) {
         int n = arr.length;
         for (int i = 1; i < n; i++) {
@@ -81,6 +138,12 @@ public class Ordenador {
         }
         return arr;
     }
+    
+    /**
+     * Ejecuta el proceso de ordenamiento Insertion Sort.
+     * @param datos Arreglo original de hampones.
+     * @return Matriz de hampones ordenada.
+     */
     public Hampon[][] ordenarInsertionSort(Hampon[] datos) {
         iteraciones = 0;
         long inicio = System.nanoTime();
@@ -95,6 +158,15 @@ public class Ordenador {
     }
 
     // ─── Quick Sort ─────────────────────────────────────────────────────────────
+    
+    /**
+     * Implementación recursiva del algoritmo Quick Sort.
+     * @param arr Arreglo a ordenar.
+     * @param start Índice inicial del sub-arreglo.
+     * @param end Índice final del sub-arreglo.
+     * @param filtro Atributo por el cual se ordena ("dinero" o "edad").
+     * @return Arreglo ordenado.
+     */
     public Hampon[] quickSort(Hampon[] arr, int start, int end, String filtro) {
         if (end <= start) return arr;
         int pivot;
@@ -108,6 +180,15 @@ public class Ordenador {
         quickSort(arr, pivot + 1, end, filtro);
         return arr;
     }
+    
+    /**
+     * Método auxiliar de Quick Sort que particiona el arreglo en torno a un pivote.
+     * @param arr Arreglo a particionar.
+     * @param start Índice inicial.
+     * @param end Índice final (donde se ubica el pivote inicial).
+     * @param comp Comparador para la lógica de partición.
+     * @return El índice final del pivote después de la reorganización.
+     */
     public int particion(Hampon[] arr, int start, int end, Comparator<Hampon> comp) {
         Hampon pivot = arr[end];
         int i = start - 1;
@@ -126,6 +207,12 @@ public class Ordenador {
         arr[end] = t;
         return i;
     }
+    
+    /**
+     * Ejecuta el proceso de ordenamiento Quick Sort.
+     * @param datos Arreglo original de hampones.
+     * @return Matriz de hampones ordenada.
+     */
     public Hampon[][] ordenarQuickSort(Hampon[] datos) {
         iteraciones = 0;
         long inicio = System.nanoTime();
@@ -140,7 +227,14 @@ public class Ordenador {
     }
 
     // ─── Merge Sort ─────────────────────────────────────────────────────────────
-  // Merge Sort
+
+    /**
+     * Implementación recursiva de Merge Sort.
+     * Divide el arreglo en mitades hasta llegar a arreglos de tamaño 1.
+     * @param arr Arreglo a dividir.
+     * @param filtro Atributo por el cual se ordena ("dinero" o "edad").
+     * @return Arreglo ordenado.
+     */
     public Hampon[] mergeSort(Hampon[] arr, String filtro){
         int n = arr.length;
         if(n <= 1) return arr;
@@ -161,6 +255,14 @@ public class Ordenador {
         }
         return arr;
     }
+    
+    /**
+     * Método auxiliar de Merge Sort que combina dos sub-arreglos de forma ordenada.
+     * @param left Sub-arreglo izquierdo.
+     * @param right Sub-arreglo derecho.
+     * @param arr Arreglo destino donde se mezclan los datos.
+     * @param comp Comparador para la lógica de mezcla.
+     */
     public void merge(Hampon[] left, Hampon[] right, Hampon[] arr, Comparator<Hampon> comp){
         int leftSize = arr.length / 2;
         int rightSize = arr.length - leftSize;
@@ -176,6 +278,12 @@ public class Ordenador {
         while(leftPivot < leftSize){ arr[i++] = left[leftPivot++]; }
         while(rightPivot < rightSize){ arr[i++] = right[rightPivot++]; }
     }
+    
+    /**
+     * Ejecuta el proceso de ordenamiento Merge Sort.
+     * @param data Arreglo original de hampones.
+     * @return Matriz de hampones ordenada.
+     */
     public Hampon[][] ordenarMergeSort(Hampon[] data){
         iteraciones = 0;
         long inicio = System.nanoTime();
@@ -189,7 +297,16 @@ public class Ordenador {
         tiempoNs = System.nanoTime() - inicio;
         return asientos;
     }
+    
+    
     // ─── construirMatriz — cuadrado perfecto k×k ────────────────────────────────
+    
+    /**
+     * Transforma un arreglo lineal en una matriz cuadrada.
+     * Se utiliza principalmente para representar los asientos en el auditorio.
+     * @param lista Arreglo plano de hampones.
+     * @return Una matriz de {@code k x m} donde {@code k} es la raíz cuadrada de n.
+     */
     public Hampon[][] construirMatriz(Hampon[] lista) {
         int n = lista.length;
         int k = (int) Math.sqrt(n);

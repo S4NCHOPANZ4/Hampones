@@ -6,11 +6,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * la clase se encargada de la generación y gestión de objetos de tipo {@link Hampon}.
+ * Proporciona métodos para generar listas de hampones con datos aleatorios, ordenados 
+ * o importados desde archivos externos.
+ * 
+ */
 public class GeneradorDeHampones {
 
     private Random random = new Random();
-
+    
     // 50 nombres × 65 apellidos = 3 250 combinaciones únicas posibles
+    
+    /** 
+     * Banco de nombres disponibles para la generación aleatoria.
+     */
+
     private String[] nombres = {
         "Andrés",     "Rafael",      "Claudia",     "Hernán",      "Julia",
         "Carlos",     "Christian",   "María Clara", "Honorio",     "Alirio",
@@ -23,6 +34,10 @@ public class GeneradorDeHampones {
         "Hernando",   "Sandra",      "Jorge",       "Cecilia",     "Luis",
         "Ana",        "Gustavo",     "Elena",       "Raúl",        "Martha"
     };
+    
+    /** 
+     * Banco de apellidos disponibles para la generación aleatoria.
+     */
 
     private String[] apellidos = {
         "Forero",     "Nieto",       "Zuleta",      "Márquez",     "Nuttin",
@@ -41,8 +56,12 @@ public class GeneradorDeHampones {
     };
 
     /**
-     * Construye la lista completa de combinaciones "Nombre Apellido",
-     * la baraja y devuelve las primeras `cantidad`.
+     * Construye una lista de combinaciones únicas de "Nombre Apellido".
+     * El método garantiza que no existan nombres duplicados barajando todas las combinaciones y seleccionando la cantidad solicitada.
+     * 
+     * @param cantidad El número de nombres únicos requeridos.
+     * @return Un arreglo de String con los nombres generados.
+     * @throws IllegalArgumentException Si la cantidad solicitada supera el máximo de combinaciones posibles.
      */
     private String[] obtenerNombresUnicos(int cantidad) {
         int max = nombres.length * apellidos.length;
@@ -71,7 +90,13 @@ public class GeneradorDeHampones {
     }
 
     // ─── Generadores ────────────────────────────────────────────────────────────
-
+    
+    /**
+     * Genera un arreglo de Hampones con valores de edad y dinero totalmente aleatorios.
+     * 
+     * @param cantidad Número de objetos Hampon a generar.
+     * @return Arreglo de {@link Hampon} con datos aleatorios.
+     */
     public Hampon[] generarListaAleatoria(int cantidad) {
         String[] pool = obtenerNombresUnicos(cantidad);
         Hampon[] lista = new Hampon[cantidad];
@@ -84,7 +109,15 @@ public class GeneradorDeHampones {
         }
         return lista;
     }
-
+    
+    /**
+     * Genera una lista de Hampones cuyos datos numéricos (edad y dinero) 
+     * están organizados de forma descendente (de mayor a menor).
+     * 
+     * @param cantidad Número de objetos Hampon a generar.
+     * @return Arreglo de {@link Hampon} ordenado de forma descendente.
+     */
+    
     public Hampon[] generarListaDatosMayorAMenor(int cantidad) {
         String[] pool = obtenerNombresUnicos(cantidad);
         Hampon[] lista = new Hampon[cantidad];
@@ -97,7 +130,14 @@ public class GeneradorDeHampones {
         }
         return lista;
     }
-
+    
+    /**
+     * Genera una lista de Hampones cuyos datos numéricos (edad y dinero) 
+     * están organizados de forma ascendente (de menor a mayor).
+     * 
+     * @param cantidad Número de objetos Hampon a generar.
+     * @return Arreglo de {@link Hampon} ordenado de forma ascendente.
+     */
     public Hampon[] generarListaDatosMenorAMayor(int cantidad) {
         String[] pool = obtenerNombresUnicos(cantidad);
         Hampon[] lista = new Hampon[cantidad];
@@ -111,9 +151,13 @@ public class GeneradorDeHampones {
         return lista;
     }
     
-     /**
-     * Metodo para importar una lista de hampones desde un archivo TXT.
-     * Formato esperado (una línea por hampón): nombre,edad,dinero
+    /**
+     * Importa una lista de hampones desde un archivo de texto plano.
+     * El formato esperado por cada línea es: {@code nombre,edad,dinero}.
+     * 
+     * @param rutaArchivo Ruta local o absoluta del archivo .txt a importar.
+     * @return Arreglo de {@link Hampon} con los datos extraídos del archivo.
+     * @throws Exception Si ocurre un error de lectura de archivo o acceso.
      */
     public Hampon[] importarListaDesdeArchivo(String rutaArchivo) throws Exception {
         java.util.List<Hampon> lista = new java.util.ArrayList<>();
